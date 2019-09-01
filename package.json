@@ -7,7 +7,7 @@
     "node": "10.15.3"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "server.js"
   },
   "keywords": [],
   "author": "",
