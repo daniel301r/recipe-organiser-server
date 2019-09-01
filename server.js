@@ -161,6 +161,6 @@ const database = {
 
 
 
-app.listen(3001, ()=>{
-    console.log('listening');
+app.listen(process.env.PORT || 3001, ()=>{
+    console.log(`app is running on ${process.env.PORT}`);
 })
