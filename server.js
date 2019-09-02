@@ -9,7 +9,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/', 'it is working') // this needs to be users that get's passed in from the route but changed it to see if it works
+app.use('/', users) // this needs to be users that get's passed in from the route but changed it to see if it works
 
 // connect to MongoDB
 mongoose.connect('mongodb+srv://bobx3256:' + process.env.MONGO_ATLAS_PW + '@cluster0-df2gn.mongodb.net/recipeOrganiser?retryWrites=true&w=majority', {useNewUrlParser: true});

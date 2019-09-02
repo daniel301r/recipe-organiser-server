@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/users');
 
+router.get('/', (req, res) => {
+  console.log('it is working now')
+})
 // home
 
 router.get('/home/:userId', (req, res) => {
