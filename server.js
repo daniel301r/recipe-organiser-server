@@ -5,15 +5,11 @@ const mongoose = require('mongoose');
 
 // Routes
 const users = require('./api/routes/users');
-
-
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-
-app.use('/', users)
-
+app.use('/', 'it is working') // this needs to be users that get's passed in from the route but changed it to see if it works
 
 // connect to MongoDB
 mongoose.connect('mongodb+srv://bobx3256:' + process.env.MONGO_ATLAS_PW + '@cluster0-df2gn.mongodb.net/recipeOrganiser?retryWrites=true&w=majority', {useNewUrlParser: true});
@@ -158,8 +154,6 @@ const database = {
       }
     ]
   }
-
-
 
 app.listen(process.env.PORT || 3001, ()=>{
     console.log(`app is running on ${process.env.PORT}`);
