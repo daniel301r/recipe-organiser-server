@@ -259,7 +259,7 @@ router.post('/signup', (req, res) =>{
 
 // sign in
 // changed this from '/signin'
-router.post('/signin', (req, res) => {
+router.post('/', (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
