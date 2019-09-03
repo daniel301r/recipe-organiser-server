@@ -7,7 +7,10 @@ const User = require('../models/users');
 
 // home
 
-// router.get('/', (req, res) => {res.send('it is working')})
+router.get('/', (req, res) => {
+  // res.redirect('/sigin')
+  return res.send('it is working')
+});
 
 router.get('/home/:userId', (req, res) => {
   const id = req.params.userId;
@@ -259,7 +262,7 @@ router.post('/signup', (req, res) =>{
 
 // sign in
 // changed this from '/signin'
-router.post('/', (req, res) => {
+router.post('/signin', (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {

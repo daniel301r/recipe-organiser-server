@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 // Routes
 const users = require('./api/routes/users');
 
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -16,7 +15,9 @@ app.use('/', users)
 
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://bobx3256:' + process.env.MONGO_ATLAS_PW + '@cluster0-df2gn.mongodb.net/recipeOrganiser?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+
+// the last way I connected -'mongodb+srv://bobx3256:' + process.env.MONGO_ATLAS_PW + '@cluster0-df2gn.mongodb.net/recipeOrganiser?retryWrites=true&w=majority'
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
