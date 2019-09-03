@@ -7,7 +7,7 @@ const User = require('../models/users');
 
 // home
 
-router.get('/', (req, res) => {res.send('it is working')})
+// router.get('/', (req, res) => {res.send('it is working')})
 
 router.get('/home/:userId', (req, res) => {
   const id = req.params.userId;
