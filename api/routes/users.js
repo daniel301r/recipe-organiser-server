@@ -8,7 +8,7 @@ const User = require('../models/users');
 // home
 
 router.get('/', (req, res) => {
-  // res.redirect('/sigin')
+  // res.redirect('/signin')
   return res.send('it is working')
 });
 
