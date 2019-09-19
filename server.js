@@ -13,7 +13,6 @@ app.use(cors());
 
 app.use('/', users)
 
-
 // connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 
