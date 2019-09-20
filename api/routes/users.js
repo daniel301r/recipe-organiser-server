@@ -8,7 +8,6 @@ const User = require('../models/users');
 // home
 
 router.get('/', (req, res) => {
-  // res.redirect('/signin')
   return res.send('it is working')
 });
 
@@ -261,20 +260,19 @@ router.post('/signup', (req, res) =>{
 })
 
 // sign in
-// changed this from '/signin'
 router.post('/signin', (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
       if (user.length < 1){
         return res.status(401).json({
-          message: 'Auth failed'
+          message: 'Auth failed because of user length'
         })
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) =>{
         if (err){
           return res.status(401).json({
-            message: 'Auth failed'
+            message: 'Auth failed after password entered'
           });
         }
         if (result) {
@@ -284,7 +282,7 @@ router.post('/signin', (req, res) => {
           });
         }
         res.status(401).json({
-          message: 'Auth failed'
+          message: 'Auth failed - something else'
         })
       });
     })
