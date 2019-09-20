@@ -264,16 +264,15 @@ router.post('/signin', (req, res) => {
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
-      consol.log(user)
-      // if (user.length < 1){
-      //   return res.status(401).json({
-      //     message: 'Auth failed because of user length'
-      //   })
-      // }
+      if (user.length < 1){
+        return res.status(401).json({
+          message: 'Auth failed'
+        })
+      }
       bcrypt.compare(req.body.password, user[0].password, (err, result) =>{
         if (err){
           return res.status(401).json({
-            message: 'Auth failed after password entered'
+            message: 'Auth failed'
           });
         }
         if (result) {
@@ -283,7 +282,7 @@ router.post('/signin', (req, res) => {
           });
         }
         res.status(401).json({
-          message: 'Auth failed - something else'
+          message: 'Auth failed'
         })
       });
     })
