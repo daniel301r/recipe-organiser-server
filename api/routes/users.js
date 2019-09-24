@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 
 // home
-
 router.get('/', (req, res) => {
   return res.send('it is working')
 });
@@ -16,7 +15,7 @@ router.get('/home/:userId', (req, res) => {
   User.findOne({ _id: id})
     .exec()
     .then(user => {
-      // should probably check to see if user has been found
+      // need to check if user has been found
       res.status(202).json({
         message: 'recipes found',
         recipes: user.recipes
@@ -30,13 +29,12 @@ router.get('/home/:userId', (req, res) => {
 })
 
 // recipe page
-
 router.get('/recipe/:userId/:recipe_id', (req, res) => {
   const { userId, recipe_id } = req.params;
   User.findOne({ _id: userId})
     .exec()
     .then(user => {
-      // should probably check to see if user has been found
+      // need to check if user has been found
       const recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
       })
@@ -55,13 +53,11 @@ router.get('/recipe/:userId/:recipe_id', (req, res) => {
 // all edit recipes
 
 // get recipe data overview
-
 router.get('/editRecipe/overview/:userId/:recipe_id', (req, res) => {
   const { userId, recipe_id } = req.params;
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       const recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
       })
@@ -76,17 +72,14 @@ router.get('/editRecipe/overview/:userId/:recipe_id', (req, res) => {
 })
 
 // edit overview change data
-
 router.post('/editRecipe/overview/:userId/:recipe_id', (req, res) => {
   const { userId, recipe_id } = req.params;
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       let recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
-      })
-      // here I need to add the new data to recipe and then I need to replace it in the 
+      }) 
       const { name, description, recipeTags, comments } = req.body;
       recipe.name = name;
       recipe.description = description;
@@ -112,13 +105,11 @@ router.post('/editRecipe/overview/:userId/:recipe_id', (req, res) => {
 })
 
 // get recipe data instructions
-
 router.get('/editRecipe/instructions/:userId/:recipe_id', (req, res) => {
   const { userId, recipe_id } = req.params;
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       const recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
       })
@@ -138,11 +129,9 @@ router.post('/editRecipe/instructions/:userId/:recipe_id', (req, res) => {
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       let recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
-      })
-      // here I need to add the new data to recipe and then I need to replace it in the 
+      }) 
       const { instructions } = req.body;
       recipe.instructions = instructions;
 
@@ -169,7 +158,6 @@ router.get('/editRecipe/ingredients/:userId/:recipe_id', (req, res) => {
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       const recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
       })
@@ -189,11 +177,9 @@ router.post('/editRecipe/ingredients/:userId/:recipe_id', (req, res) => {
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // I had to compare it with '==' this because for some reason I can't convert one of them to strings
       let recipe = user.recipes.find(recipe => {
         return recipe._id == recipe_id
-      })
-      // here I need to add the new data to recipe and then I need to replace it in the 
+      }) 
       const { ingredients } = req.body;
       recipe.ingredients = ingredients;
 
@@ -216,13 +202,12 @@ router.post('/editRecipe/ingredients/:userId/:recipe_id', (req, res) => {
 })
 
 // sign up
-
 router.post('/signup', (req, res) =>{
   const { name, email } = req.body;
   User.find({ email: email })
     .exec()
     .then(user => {
-      if (user.length >= 1) { // we do this because it returns an array even if it doesn't find something so we check to see if there is actually one
+      if (user.length >= 1) { 
         return res.status(422).json({
           message: 'Mail already exists',
           user: user
@@ -293,14 +278,12 @@ router.post('/signin', (req, res) => {
 });
 
 // add recipe to database
-
-// should this be post or put?
 router.put('/addRecipe/instructions', (req, res) => {
   const { userId, recipe } = req.body;
   User.findOne({ _id: userId })
     .exec()
     .then(user => {
-      // probably should check here if the user has been found
+      // need to check if user has been found
       user.recipes.push({
         _id: new mongoose.Types.ObjectId(),
         name: recipe.name,
