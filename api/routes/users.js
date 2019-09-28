@@ -278,7 +278,7 @@ router.post('/signin', (req, res) => {
 });
 
 // add recipe to database
-router.put('/addRecipe/instructions', (req, res) => {
+router.post('/addRecipe/instructions', (req, res) => {
   const { userId, recipe } = req.body;
   User.findOne({ _id: userId })
     .exec()
