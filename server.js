@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use('/', users);
 
-//see if this solves the problem with 
+//see if this solves the problem with adding the recipe
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
