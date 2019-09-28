@@ -11,7 +11,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/', users)
+app.use('/', users);
+
+//see if this solves the problem with 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+})
 
 // connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
